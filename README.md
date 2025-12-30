@@ -1,11 +1,5 @@
 #Fintune SALMONN for multi-turn emotional trajectory
 
-<h1 align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com/?lines=Hello,+There!+👋;Welcome+to+double red finetuned SALMONN;&center=true&size=30">
-  </a>
-</h1>
-
 🚀🚀 Welcome to the repo of **Fintuned SALMONN**!
 
 SALMONN is a large language model (LLM) enabling **speech, audio events, and music inputs**, which is developed by the Department of Electronic Engineering at Tsinghua University and ByteDance. Instead of speech-only input or audio-event-only input, SALMONN can perceive and understand all kinds of audio inputs and therefore obtain emerging capabilities such as multilingual speech recognition and translation and audio-speech co-reasoning. This can be regarded as giving the LLM "ears" and cognitive hearing abilities, which makes SALMONN a step towards hearing-enabled artificial general intelligence.
@@ -21,7 +15,7 @@ We leavege the Human-like Spoken Dialogue Systems Challenge Track1 dataset to fi
 
 The model architecture of SALMONN is shown below. A window-level Q-Former is used as the connection module to fuse the outputs from a Whisper speech encoder and a BEATs audio encoder as augmented audio tokens, which are aligned with the LLM input space. The LoRA adaptor aligns the augmented LLM input space with its output space. The text prompt is used to instruct SALMONN to answer open-ended questions about the general audio inputs and the answers are in the LLM text responses. 
 
-<div align=center><img src="resource/structure.png" height="100%" width="75%"/></div>
+<div align=center><img src="structure.png" height="100%" width="75%"/></div>
 
 ## ⚡️ Demos
 
