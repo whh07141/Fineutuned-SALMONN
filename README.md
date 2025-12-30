@@ -1,29 +1,21 @@
-# SALMONN: Speech Audio Language Music Open Neural Network
-
-<div align=center><img src="resource/salmon.png" height="256px" width="256px"/></div>
+#Fintune SALMONN for multi-turn emotional trajectory
 
 <h1 align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com/?lines=Hello,+There!+👋;Welcome+to+SALMONN;&center=true&size=30">
+    <img src="https://readme-typing-svg.herokuapp.com/?lines=Hello,+There!+👋;Welcome+to+double red finetuned SALMONN;&center=true&size=30">
   </a>
 </h1>
 
-🚀🚀 Welcome to the repo of **SALMONN**!
+🚀🚀 Welcome to the repo of **Fintuned SALMONN**!
 
 SALMONN is a large language model (LLM) enabling **speech, audio events, and music inputs**, which is developed by the Department of Electronic Engineering at Tsinghua University and ByteDance. Instead of speech-only input or audio-event-only input, SALMONN can perceive and understand all kinds of audio inputs and therefore obtain emerging capabilities such as multilingual speech recognition and translation and audio-speech co-reasoning. This can be regarded as giving the LLM "ears" and cognitive hearing abilities, which makes SALMONN a step towards hearing-enabled artificial general intelligence.
+We leavege the Human-like Spoken Dialogue Systems Challenge Track1 dataset to finetune SALMONN for accurately identify and concisely summarize a user’s emotional changes throughout a multi-turn conversation.
 
 <div style='display:flex; gap: 0.25rem; '>
 <a href='https://openreview.net/pdf?id=14rn7HpKVk'><img src='https://img.shields.io/badge/SALMONN_paper-PDF-green'></a>
 <a href='https://huggingface.co/tsinghua-ee/SALMONN'><img src='https://img.shields.io/badge/SALMONN--13B-checkpoint-yellow'></a> 
 <a href='https://huggingface.co/tsinghua-ee/SALMONN-7B'><img src='https://img.shields.io/badge/SALMONN--7B-checkpoint-yellow'></a>
 </div>
-
-## 🔥 News
-- [2024-05-28] 🧳 We have released all the annotations (including 600k SQA/AQA data and 50k audio-based storytelling data) for the 3-stage training of SALMONN! Feel free to download them [here](https://drive.google.com/file/d/15cQO--rtMM9JD22y-A5oXXvT3DujgE2e/view?usp=sharing)!
-- [2024-04-07] 🤖 We have released all the codes you need to train your own SALMONN! Try some cool things!
-- [2024-01-16] 💖 Our paper was accepted by ICLR 2024!
-- [2023-11-13] 🎁 We have released a **7B version of SALMONN** at [tsinghua-ee/SALMONN-7B](https://huggingface.co/tsinghua-ee/SALMONN-7B) and built the 7B demo [here](https://huggingface.co/spaces/tsinghua-ee/SALMONN-7B-gradio)!
-- [2023-10-08] ✨ We have released [**the model checkpoint**](https://huggingface.co/tsinghua-ee/SALMONN) and **the inference code** for SALMONN-13B!
 
 ## 🌟 Structure
 
@@ -43,15 +35,20 @@ Here are some examples of SALMONN.
 | [duck.wav](./resource/audio_demo/duck.wav)             | ![story](resource/response_demo/story.png)   |
 | [music.wav](./resource/audio_demo/music.wav)           | ![mc](resource/response_demo/mc.png)         |
 
+## ✨ Innovation
+We preprocessed the training and testing JSON. During data loading in(dataset_v1.py), we concatenated multiple audio rounds and directly packaged the text into a standard SALMONN prompt.
+The prompt for fine-tuning was: "task1_emotional_trajectory": [ "<SpeechHere>" ].
 
-## 🌈 How to train a model
+## 🌈 How to Finetune a model
 
 For SALMONN-13B v1, you need to use the following dependencies:
 1. Our environment: The python version is 3.9.17, and other required packages can be installed with the following command: ```pip install -r requirements.txt```.
 2. Download [whisper large v2](https://huggingface.co/openai/whisper-large-v2/tree/main) to ```whisper_path```.
 3. Download [Fine-tuned BEATs_iter3+ (AS2M) (cpt2)](https://1drv.ms/u/s!AqeByhGUtINrgcpj8ujXH1YUtxooEg?e=E9Ncea) to `beats_path`.
 4. Download [vicuna 13B v1.1](https://huggingface.co/lmsys/vicuna-13b-v1.1/tree/main) to ```llama_path```.
-5. Running with ```python3 train.py --cfg-path configs/config.yaml``` in A100-SXM-80GB.
+5. prepare the training json.
+   We use the convert.py to transform the Human-like Spoken Dialogue Systems Challenge training json for SALMONN finetuning.
+7. Running with ```python3 train.py --cfg-path configs/config.yaml``` in A100-SXM-80GB.
 
 ## 🌈 How to inference in CLI
 
@@ -59,27 +56,7 @@ For SALMONN-13B v1, you need to use the following dependencies:
 2. Download [salmonn v1](https://huggingface.co/tsinghua-ee/SALMONN/blob/main/salmonn_v1.pth) to ```ckpt```.
 3. Running with ```python3 cli_inference.py --cfg-path configs/decode_config.yaml``` in A100-SXM-80GB. Now you can input ```wav_path``` and ```prompt```. Enjoy yourself !
 
-## 🌈 How to launch a web demo
 
-1. Same as **How to train a model: 1-4**.
-2. Download [salmonn v1](https://huggingface.co/tsinghua-ee/SALMONN/blob/main/salmonn_v1.pth) to ```ckpt```.
-3. Running with ```python3 web_demo.py --cfg-path configs/decode_config.yaml``` in A100-SXM-80GB.
+## ✨ Acknowledgements
+Our work is based on the code provided by SALMONN（https://github.com/bytedance/SALMONN）.
 
-## 👀 Team
-
-**Team Tsinghua**: Wenyi Yu, Changli Tang, Guangzhi Sun, Chao Zhang
-
-**Team ByteDance**: Xianzhao Chen, Wei Li, Tian Tan, Lu Lu, Zejun Ma
-
-## ✨ Citation
-If you find SALMONN useful, please cite the paper:
-```
-@inproceedings{
-  tang2024salmonn,
-  title={{SALMONN}: Towards Generic Hearing Abilities for Large Language Models},
-  author={Changli Tang and Wenyi Yu and Guangzhi Sun and Xianzhao Chen and Tian Tan and Wei Li and Lu Lu and Zejun MA and Chao Zhang},
-  booktitle={The Twelfth International Conference on Learning Representations},
-  year={2024},
-  url={https://openreview.net/forum?id=14rn7HpKVk}
-}
-```
